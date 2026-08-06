@@ -1,3 +1,5 @@
+
+import 'dart:io';
 const version = '0.0.1';
 void main(List<String> arguments) {
   if (arguments.isEmpty || arguments.first == 'help') {
@@ -5,11 +7,30 @@ void main(List<String> arguments) {
   } else if (arguments.first == 'version') {
     print('Dartpedia CLI version $version');
   } else if (arguments.first == 'search') {
+      final inputArgs = arguments.length > 1 ? arguments.sublist(1) : null;
+    searchWikipedia(inputArgs);
   
     print('Search command recognized!');
   } else {
     printUsage();
   }
+}
+void searchWikipedia(List<String>? arguments) {
+  final String articleTitle;
+
+ 
+  if (arguments == null || arguments.isEmpty) {
+    print('Please provide an article title.');
+    
+    articleTitle = stdin.readLineSync() ?? '';
+  } else {
+  
+    articleTitle = arguments.join(' ');
+  }
+
+  print('Looking up articles about "$articleTitle". Please wait.');
+  print('Here ya go!');
+  print('(Pretend this is an article about "$articleTitle")');
 }
 
 void printUsage() {
@@ -17,3 +38,5 @@ void printUsage() {
     "The following commands are valid: 'help', 'version', 'search <ARTICLE-TITLE>'"
   );
 }
+
+
