@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'arguments.dart';
 
+
+
 // Prints program and argument usage.
 //
 // When given a command as an argument, it prints the usage of
@@ -37,7 +39,7 @@ class HelpCommand extends Command {
 
   @override
   FutureOr<Object?> run(ArgResults args) async {
-    var usage = runner.usage;
+    var usage = runner.usage?.toString() ?? '';
     for (var command in runner.commands) {
       usage += '\n ${command.usage}';
     }
